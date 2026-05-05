@@ -3,30 +3,6 @@ Heartbeat loop — main orchestration per heartbeat.md.
 State machine: setup → join → play → settle → repeat.
 Respects First-Run Intake config flags for Railway/Docker deployment.
 """
-import subprocess
-import sys
-import os
-
-def force_update_dependencies():
-    print("🔄 [AUTO-UPDATE] Mengecek & memperbarui skills/dependencies...")
-    try:
-        # 1. Upgrade pip & install ulang requirements
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt", "--upgrade"])
-        print("✅ Dependencies berhasil diperbarui!")
-    except subprocess.CalledProcessError as e:
-        print(f"⚠️ Update gagal: {e}")
-        print("Melanjutkan dengan versi saat ini...")
-    except Exception as e:
-        print(f"⚠️ Error saat update: {e}")
-
-# Jalankan update SEBELUM bot berjalan
-force_update_dependencies()
-
-# ==========================================
-# KODE BOT ANDA YANG SUDAH ADA TETAP DI BAWAH INI
-# ==========================================
-
 import asyncio
 from bot.api_client import MoltyAPI, APIError
 from bot.dashboard.state import dashboard_state
