@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependencies first (cache layer for fast rebuilds)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt --update --upgrade 
+RUN pip install --no-cache-dir -r requirements.txt 
 
 # Copy bot source
 COPY bot/ ./bot/
